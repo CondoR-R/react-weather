@@ -1,7 +1,7 @@
 import type React from "react";
+import { useState } from "react";
 
 import style from "./City.module.scss";
-import { useState } from "react";
 
 const City: React.FC = () => {
   const [isShow, setIsShow] = useState<boolean>(false);
@@ -45,7 +45,7 @@ const City: React.FC = () => {
           </svg>
         </button>
       </div>
-      <div className={`${style.searchBox} ${isShow ? style.active : ""}`}>
+      <div className={style.searchBox}>
         <input type="text" />
       </div>
     </div>
