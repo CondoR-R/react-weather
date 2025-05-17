@@ -1,0 +1,15 @@
+:root {
+  font-size: calc(0.5em + 1vw);
+}
+
+body {
+  background-color: #d69e36;
+  color: var(--color-white);
+  font-family: sans-serif;
+}
+
+.app {
+  margin: 0 auto;
+  padding: 2em 0;
+  width: 60em;
+}
