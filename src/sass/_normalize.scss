@@ -60,7 +60,7 @@ body,
   чтобы избежать взаимодействие с более сложным селектором
  */
 p {
-  --paragraphMarginBottom: 24px;
+  --paragraphMarginBottom: 0;
 
   margin-block: 0;
 }

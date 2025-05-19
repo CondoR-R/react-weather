@@ -1,9 +1,10 @@
 import type React from "react";
 
 import City from "../../components/City/City";
-import CurrentTemperature from "../../components/CurrentTemperature/currentTemperature";
+import CurrentTemperature from "../../components/CurrentTemperature/CurrentTemperature";
 
 import style from "./Header.module.scss";
+import WeatherIcon from "../../components/WeatherIcon/WeatherIcon";
 
 const Header: React.FC = () => {
   return (
@@ -12,6 +13,7 @@ const Header: React.FC = () => {
         <City />
         <CurrentTemperature />
       </div>
+      <WeatherIcon />
     </div>
   );
 };
