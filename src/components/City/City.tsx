@@ -26,7 +26,11 @@ const City: React.FC = () => {
         />
       </svg>
       <span>Moscow</span>
-      <button onClick={onClickShowInput} className={style.showInput}>
+      <button
+        style={{ rotate: isShow ? "180deg" : "0deg" }}
+        onClick={onClickShowInput}
+        className={style.showInput}
+      >
         <svg
           width="11"
           height="21"
