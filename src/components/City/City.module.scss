@@ -20,17 +20,13 @@
 
   .searchBox {
     transition: all 0.3s;
-    // display: none;
-    // opacity: 0;
-    // visibility: hidden;
-    // transform: translateX(-5rem);
 
     input {
       border: none;
       outline: none;
       border-radius: 2rem;
       padding: 0.5rem 1rem;
-      background-color: color-mix(in srgb, var(--color-white) 30%, transparent);
+      background-color: color-mix(in srgb, var(--color-white) 20%, transparent);
     }
   }
 }

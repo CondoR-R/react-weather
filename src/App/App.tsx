@@ -1,10 +1,12 @@
 import type React from "react";
-import Header from "../parentComponents/Header/Header";
+import CurrentBox from "../parentComponents/CurrentBox/CurrentBox";
+import ForecastBox from "../parentComponents/ForecastBox/ForecastBox";
 
 const App: React.FC = () => {
   return (
     <div className="app">
-      <Header />
+      <CurrentBox />
+      <ForecastBox />
     </div>
   );
 };

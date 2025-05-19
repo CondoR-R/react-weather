@@ -1,0 +1,13 @@
+.box {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 24rem);
+
+  gap: 2rem;
+}
+
+.chart {
+  grid-column: 1 / 4;
+  grid-row: 2 / -1;
+}
