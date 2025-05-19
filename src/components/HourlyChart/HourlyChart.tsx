@@ -1,7 +1,8 @@
 import type React from "react";
+import { Line, LineChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 
 import style from "./HourlyChart.module.scss";
-import { Line, LineChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
+import weatherImages from "../../constants/weather";
 
 interface ForecastBoxProps {
   className?: string;
@@ -9,18 +10,18 @@ interface ForecastBoxProps {
 
 const HourlyChart: React.FC<ForecastBoxProps> = ({ className }) => {
   const forecastData = [
-    { time: "00:00", temp: 26 },
-    { time: "2:00", temp: 26 },
-    { time: "4:00", temp: 22 },
-    { time: "6:00", temp: 16 },
-    { time: "8:00", temp: 20 },
-    { time: "10:00", temp: 22 },
-    { time: "12:00", temp: 16 },
-    { time: "14:00", temp: 26 },
-    { time: "16:00", temp: 26 },
-    { time: "18:00", temp: 22 },
-    { time: "20:00", temp: 16 },
-    { time: "22:00", temp: 20 },
+    { time: "00:00", temp: 26, weather: "cloudy", wind: "5km/h" },
+    { time: "2:00", temp: 26, weather: "cloudy", wind: "5km/h" },
+    { time: "4:00", temp: 22, weather: "cloudy", wind: "5km/h" },
+    { time: "6:00", temp: 16, weather: "cloudy", wind: "5km/h" },
+    { time: "8:00", temp: 20, weather: "cloudy", wind: "5km/h" },
+    { time: "10:00", temp: 22, weather: "cloudy", wind: "5km/h" },
+    { time: "12:00", temp: 16, weather: "cloudy", wind: "5km/h" },
+    { time: "14:00", temp: 26, weather: "cloudy", wind: "5km/h" },
+    { time: "16:00", temp: 26, weather: "cloudy", wind: "5km/h" },
+    { time: "18:00", temp: 22, weather: "cloudy", wind: "5km/h" },
+    { time: "20:00", temp: 16, weather: "cloudy", wind: "5km/h" },
+    { time: "22:00", temp: 20, weather: "cloudy", wind: "5km/h" },
   ];
   return (
     <div className={`${style.chartBox} ${className}`}>
@@ -37,7 +38,7 @@ const HourlyChart: React.FC<ForecastBoxProps> = ({ className }) => {
             fill="white"
           />
         </svg>
-        <span>24-hour forecast</span>
+        <span>24-hour temperature</span>
       </h2>
       <div className={style.chartWrapper}>
         <ResponsiveContainer
@@ -59,6 +60,20 @@ const HourlyChart: React.FC<ForecastBoxProps> = ({ className }) => {
             />
           </LineChart>
         </ResponsiveContainer>
+      </div>
+      <div className={style.bottomRow}>
+        {forecastData.map(({ weather, wind }, i) => (
+          <div key={i} className={style.infoBox}>
+            <img
+              src={weatherImages[weather]}
+              className={style.weather}
+              alt={weather}
+              width={25}
+              height={25}
+            />
+            <span className={style.wind}>{wind}</span>
+          </div>
+        ))}
       </div>
     </div>
   );

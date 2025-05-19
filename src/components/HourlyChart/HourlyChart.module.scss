@@ -1,6 +1,7 @@
 .chartBox {
   background-color: color-mix(in srgb, var(--color-white) 20%, transparent);
   border-radius: 4rem;
+  position: relative;
 }
 
 .title {
@@ -17,7 +18,22 @@
 
 .chartWrapper {
   width: 100%;
-  height: 19rem;
+  height: 15rem;
   padding-inline: 3rem;
   color: var(--color-white);
+  margin-bottom: 1rem;
+}
+
+.bottomRow {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding-inline: 1.5rem;
+
+  .infoBox {
+    font-size: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.2rem;
+  }
 }
