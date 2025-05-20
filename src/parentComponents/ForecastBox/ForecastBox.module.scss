@@ -2,9 +2,9 @@
   display: grid;
 
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 10rem);
+  grid-template-rows: repeat(4, 8rem);
 
-  column-gap: 2rem;
+  gap: 2rem;
 }
 
 .chart {
@@ -15,4 +15,9 @@
 .weekly {
   grid-column: 4 / 5;
   grid-row: 1 / 5;
+}
+
+.tommorow {
+  grid-column: 2 / 4;
+  grid-row: 1 / 2;
 }
