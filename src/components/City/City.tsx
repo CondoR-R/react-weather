@@ -1,9 +1,13 @@
+// импорт библиотек
 import type React from "react";
 import { useState } from "react";
 
+// импорт стилей
 import style from "./City.module.scss";
 
 const City: React.FC = () => {
+  // состояния
+
   const [isShow, setIsShow] = useState<boolean>(false);
 
   const onClickShowInput = () => {

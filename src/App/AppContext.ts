@@ -1,5 +1,7 @@
+// импорт библиотек
 import { createContext } from "react";
 
+// импорт типов
 import type { Hourly } from "../types/Hourly";
 import type { Current } from "../types/Current";
 import type { Daily } from "../types/Daily";

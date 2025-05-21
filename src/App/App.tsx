@@ -1,17 +1,22 @@
+// импорт библиотек
 import type React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+// испорт контекста
 import { AppContext } from "./AppContext";
 
+// импорт функций
 import { getHourly } from "../functions/getHourly";
 import { getCurrent } from "../functions/getCurrent";
 import { getDaily } from "../functions/getDaily";
 import { getTommorow } from "../functions/getTommorow";
 
+// импорт компонентов
 import CurrentBox from "../parentComponents/CurrentBox/CurrentBox";
 import ForecastBox from "../parentComponents/ForecastBox/ForecastBox";
 
+// импорт типов
 import type { Coords } from "../types/Coords";
 import type { Hourly } from "../types/Hourly";
 import type { Current } from "../types/Current";
@@ -19,13 +24,24 @@ import type { Daily } from "../types/Daily";
 import type { Tommorow } from "../types/Tommorow";
 
 const App: React.FC = () => {
+  // состояния
+
+  // координаты
   const [coords, setCoords] = useState<Coords>({
     latitude: null,
     longitude: null,
   });
+
+  // данные для почасового прогноза
   const [hourly, setHourly] = useState<Hourly>([]);
+
+  // данные для текущей погоды
   const [current, setCurrent] = useState<Current>(null);
+
+  // данные для недельного прогноза
   const [daily, setDaily] = useState<Daily[]>([]);
+
+  // данные о завтрашней температуре
   const [tommorow, setTommorow] = useState<Tommorow>({
     text: "colder",
     value: 0,
@@ -74,6 +90,7 @@ const App: React.FC = () => {
     }
   }, [coords]);
 
+  // значения контекста
   const contextValue = {
     hourly,
     current,
