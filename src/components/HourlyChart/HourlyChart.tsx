@@ -1,28 +1,20 @@
 import type React from "react";
 import { Line, LineChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
+import { useContext } from "react";
+
+import { AppContext } from "../../App/AppContext";
+
+import weatherImages from "../../constants/weather";
 
 import style from "./HourlyChart.module.scss";
-import weatherImages from "../../constants/weather";
 
 interface ForecastBoxProps {
   className?: string;
 }
 
 const HourlyChart: React.FC<ForecastBoxProps> = ({ className }) => {
-  const forecastData = [
-    { time: "00:00", temp: 26, weather: "cloudy", wind: "5km/h" },
-    { time: "2:00", temp: 26, weather: "cloudy", wind: "5km/h" },
-    { time: "4:00", temp: 22, weather: "cloudy", wind: "5km/h" },
-    { time: "6:00", temp: 16, weather: "cloudy", wind: "5km/h" },
-    { time: "8:00", temp: 20, weather: "cloudy", wind: "5km/h" },
-    { time: "10:00", temp: 22, weather: "cloudy", wind: "5km/h" },
-    { time: "12:00", temp: 16, weather: "cloudy", wind: "5km/h" },
-    { time: "14:00", temp: 26, weather: "cloudy", wind: "5km/h" },
-    { time: "16:00", temp: 26, weather: "cloudy", wind: "5km/h" },
-    { time: "18:00", temp: 22, weather: "cloudy", wind: "5km/h" },
-    { time: "20:00", temp: 16, weather: "cloudy", wind: "5km/h" },
-    { time: "22:00", temp: 20, weather: "cloudy", wind: "5km/h" },
-  ];
+  const { hourly } = useContext(AppContext);
+
   return (
     <div className={`${style.chartBox} ${className}`}>
       <h2 className={style.title}>
@@ -43,10 +35,10 @@ const HourlyChart: React.FC<ForecastBoxProps> = ({ className }) => {
       <div className={style.chartWrapper}>
         <ResponsiveContainer
           width="108%"
-          height={"100%"}
+          height={160}
           style={{ transform: "translateX(-65px)" }}
         >
-          <LineChart data={forecastData} margin={{ left: 10, right: 20 }}>
+          <LineChart data={hourly} margin={{ left: 10, right: 20, top: 20 }}>
             <XAxis dataKey="time" stroke="#fff" tick={{ fontSize: 14 }} />
             <YAxis style={{ display: "none", visibility: "hidden" }} />
             <Line
@@ -62,18 +54,23 @@ const HourlyChart: React.FC<ForecastBoxProps> = ({ className }) => {
         </ResponsiveContainer>
       </div>
       <div className={style.bottomRow}>
-        {forecastData.map(({ weather, wind }, i) => (
-          <div key={i} className={style.infoBox}>
-            <img
-              src={weatherImages[weather]}
-              className={style.weather}
-              alt={weather}
-              width={25}
-              height={25}
-            />
-            <span className={style.wind}>{wind}</span>
-          </div>
-        ))}
+        {hourly &&
+          hourly.map((hourlyWeather, i) => {
+            if (!hourlyWeather) return;
+
+            return (
+              <div key={i} className={style.infoBox}>
+                <img
+                  src={weatherImages[hourlyWeather.weather]}
+                  className={style.weather}
+                  alt={hourlyWeather.weather}
+                  width={30}
+                  height={25}
+                />
+                <span className={style.wind}>{hourlyWeather.wind}</span>
+              </div>
+            );
+          })}
       </div>
     </div>
   );
