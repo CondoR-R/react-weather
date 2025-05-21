@@ -4,8 +4,10 @@ import axios from "axios";
 
 import { AppContext } from "./AppContext";
 
-import getHourly from "../functions/getHourly";
-import getCurrent from "../functions/getCurrent";
+import { getHourly } from "../functions/getHourly";
+import { getCurrent } from "../functions/getCurrent";
+import { getDaily } from "../functions/getDaily";
+import { getTommorow } from "../functions/getTommorow";
 
 import CurrentBox from "../parentComponents/CurrentBox/CurrentBox";
 import ForecastBox from "../parentComponents/ForecastBox/ForecastBox";
@@ -13,6 +15,8 @@ import ForecastBox from "../parentComponents/ForecastBox/ForecastBox";
 import type { Coords } from "../types/Coords";
 import type { Hourly } from "../types/Hourly";
 import type { Current } from "../types/Current";
+import type { Daily } from "../types/Daily";
+import type { Tommorow } from "../types/Tommorow";
 
 const App: React.FC = () => {
   const [coords, setCoords] = useState<Coords>({
@@ -21,6 +25,11 @@ const App: React.FC = () => {
   });
   const [hourly, setHourly] = useState<Hourly>([]);
   const [current, setCurrent] = useState<Current>(null);
+  const [daily, setDaily] = useState<Daily[]>([]);
+  const [tommorow, setTommorow] = useState<Tommorow>({
+    text: "colder",
+    value: 0,
+  });
 
   // получение координат пользователя
   useEffect(() => {
@@ -42,7 +51,7 @@ const App: React.FC = () => {
 
           const hourlyParams = `hourly=temperature_2m,wind_speed_10m,rain,showers,snowfall,cloud_cover`;
           const currentParams = `current=temperature_2m,apparent_temperature,wind_speed_10m,is_day,cloud_cover,showers,rain,snowfall`;
-          const dailyParams = `daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,sunset,sunrise`;
+          const dailyParams = `&daily=sunrise,sunset,rain_sum,showers_sum,snowfall_sum,precipitation_probability_max,temperature_2m_max,temperature_2m_min,wind_speed_10m_max,cloud_cover_mean`;
 
           const params = `${coord}&${dailyParams}&${currentParams}&${hourlyParams}&timezone=auto&forecast_hours=24`;
 
@@ -54,6 +63,8 @@ const App: React.FC = () => {
             current: currentData,
           } = data;
 
+          setTommorow(getTommorow(dailyData));
+          setDaily(getDaily(dailyData));
           setHourly(getHourly(hourlyData));
           setCurrent(getCurrent(currentData));
         })();
@@ -66,6 +77,8 @@ const App: React.FC = () => {
   const contextValue = {
     hourly,
     current,
+    daily,
+    tommorow,
   };
 
   return (

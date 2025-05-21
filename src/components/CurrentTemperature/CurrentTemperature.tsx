@@ -7,16 +7,23 @@ import style from "./currentTemperature.module.scss";
 const CurrentTemperature: React.FC = () => {
   const { current } = useContext(AppContext);
 
+  let day: string = "";
+  let date: string = "";
+
+  if (typeof current?.date === "string") {
+    const dateArr = new Date(current?.date).toString().split(" ");
+    day = dateArr[0];
+    date = `${dateArr[2]} ${dateArr[1]} ${dateArr[3]}`;
+  }
+
   return (
     <div className={style.box}>
       <div className={style.left}>
         <p className={style.temperature}>{current?.temperature}°C</p>
-        <p className={style.date}>Sunday | 12 May 2025</p>
-        <p className={style.cloudy}>
-          {`${current?.weather[0].toLocaleUpperCase()}${current?.weather.slice(
-            1
-          )}`}
+        <p className={style.date}>
+          {day} | {date}
         </p>
+        <p className={style.cloudy}>{current?.name}</p>
       </div>
       <div className={style.right}>
         <div className={style.rightBox}>

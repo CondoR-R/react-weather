@@ -1,13 +1,13 @@
 .title {
   font-size: 2.4rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .infoBox {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   column-gap: 0.5rem;
-  row-gap: 2rem;
+  row-gap: 1rem;
 
   .parametr {
     display: flex;

@@ -1,4 +1,6 @@
-export default function getHourly(hourlyData: {
+import type { Hourly } from "../types/Hourly";
+
+export function getHourly(hourlyData: {
   cloud_cover: number[];
   showers: number[];
   rain: number[];
@@ -6,7 +8,7 @@ export default function getHourly(hourlyData: {
   time: string[];
   temperature_2m: number[];
   wind_speed_10m: number[];
-}) {
+}): Hourly {
   const hourlyArr = [];
   for (let i = 0; i < 24; i++) {
     if (i % 2 !== 0) continue;

@@ -1,12 +1,14 @@
 import type React from "react";
 
+import type { Daily } from "../../types/Daily";
+
 import style from "./WeeklySlider.module.scss";
 import weatherImages from "../../constants/weather";
 
 interface WeeklySliderProps {
   onClickLeftArr: () => void;
   onClickRightArr: () => void;
-  weeklyForecastArr: { date: string; weather: string }[];
+  weeklyForecastArr: Daily[];
   activeIndex: number;
 }
 
@@ -42,27 +44,32 @@ const WeeklySlider: React.FC<WeeklySliderProps> = ({
             transform: `translateX(${60 * (2 - activeIndex) - 15}px)`,
           }}
         >
-          {weeklyForecastArr.map(({ date, weather }, i) => (
-            <div
-              key={i}
-              className={`${style.weatherBox} ${
-                activeIndex + 1 === i || activeIndex - 1 === i ? style.prev : ""
-              } ${
-                (activeIndex + 1 > i || activeIndex - 1 < i) &&
-                i !== activeIndex
-                  ? style.notActive
-                  : ""
-              }`}
-            >
-              <span>{date}</span>
-              <img
-                src={weatherImages[weather]}
-                alt={weather}
-                width={45}
-                height={30}
-              />
-            </div>
-          ))}
+          {weeklyForecastArr.map((day, i) => {
+            if (!day) return;
+            return (
+              <div
+                key={i}
+                className={`${style.weatherBox} ${
+                  activeIndex + 1 === i || activeIndex - 1 === i
+                    ? style.prev
+                    : ""
+                } ${
+                  (activeIndex + 1 > i || activeIndex - 1 < i) &&
+                  i !== activeIndex
+                    ? style.notActive
+                    : ""
+                }`}
+              >
+                <span>{day.date}</span>
+                <img
+                  src={weatherImages[day.weather]}
+                  alt={`${day.weather}`}
+                  width={45}
+                  height={30}
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
       <button

@@ -1,6 +1,6 @@
 import type { Current } from "../types/Current";
 
-export default function getCurrent(currentData: {
+export function getCurrent(currentData: {
   apparent_temperature: number;
   temperature_2m: number;
   wind_speed_10m: number;
@@ -17,12 +17,22 @@ export default function getCurrent(currentData: {
     wind: `${Math.round(currentData.wind_speed_10m)}km/h`,
     weather: "sunny",
     date: currentData.time,
+    name: "Sunny",
   };
 
-  if (currentData.cloud_cover > 50) current.weather = "cloudy";
-  else if (currentData.cloud_cover !== 0) current.weather = "partlyCloudy";
-  else if (currentData.rain || currentData.showers) current.weather = "rain";
-  else if (currentData.snowfall) current.weather = "snow";
+  if (currentData.cloud_cover > 50) {
+    current.weather = "cloudy";
+    current.name = "Cloudy";
+  } else if (currentData.cloud_cover !== 0) {
+    current.weather = "partlyCloudy";
+    current.name = "Partly cloudy";
+  } else if (currentData.rain || currentData.showers) {
+    current.weather = "rain";
+    current.name = "Rain";
+  } else if (currentData.snowfall) {
+    current.weather = "snow";
+    current.name = "Snow";
+  }
 
   return current;
 }

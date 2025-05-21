@@ -1,4 +1,7 @@
 import type React from "react";
+import { useContext } from "react";
+
+import { AppContext } from "../../App/AppContext";
 
 import style from "./TommorowTemp.module.scss";
 
@@ -7,9 +10,13 @@ interface TommorowTempProps {
 }
 
 const TommorowTemp: React.FC<TommorowTempProps> = ({ className }) => {
+  const { tommorow } = useContext(AppContext);
+
   return (
     <div className={`${style.tommorowBox} ${className}`}>
-      <span>Tommorow it will get warmer by 12</span>
+      <span>
+        Tommorow it will get {tommorow?.text} by {tommorow?.value}°C
+      </span>
       {/* <svg
         className={style.green}
         width="11"
