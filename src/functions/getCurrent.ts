@@ -1,4 +1,4 @@
-import type { Current } from "../App/App";
+import type { Current } from "../types/Current";
 
 export default function getCurrent(currentData: {
   apparent_temperature: number;
@@ -23,8 +23,6 @@ export default function getCurrent(currentData: {
   else if (currentData.cloud_cover !== 0) current.weather = "partlyCloudy";
   else if (currentData.rain || currentData.showers) current.weather = "rain";
   else if (currentData.snowfall) current.weather = "snow";
-
-  console.log(current);
 
   return current;
 }

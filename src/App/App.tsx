@@ -5,30 +5,14 @@ import axios from "axios";
 import { AppContext } from "./AppContext";
 
 import getHourly from "../functions/getHourly";
+import getCurrent from "../functions/getCurrent";
 
 import CurrentBox from "../parentComponents/CurrentBox/CurrentBox";
 import ForecastBox from "../parentComponents/ForecastBox/ForecastBox";
-import getCurrent from "../functions/getCurrent";
 
-type Coords = {
-  latitude: null | number;
-  longitude: null | number;
-};
-
-export type Hourly = ({
-  time: string;
-  temp: number;
-  weather: string;
-  wind: string;
-} | null)[];
-
-export type Current = {
-  temperature: number;
-  date: string;
-  weather: string;
-  apparentTemperature: number;
-  wind: string;
-} | null;
+import type { Coords } from "../types/Coords";
+import type { Hourly } from "../types/Hourly";
+import type { Current } from "../types/Current";
 
 const App: React.FC = () => {
   const [coords, setCoords] = useState<Coords>({
@@ -69,8 +53,6 @@ const App: React.FC = () => {
             daily: dailyData,
             current: currentData,
           } = data;
-
-          console.log(currentData);
 
           setHourly(getHourly(hourlyData));
           setCurrent(getCurrent(currentData));
