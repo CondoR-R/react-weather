@@ -1,18 +1,35 @@
 // импорт библиотек
 import type React from "react";
-import { useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+
+import { AppContext } from "../../App/AppContext";
 
 // импорт стилей
 import style from "./City.module.scss";
 
 const City: React.FC = () => {
-  // состояния
+  const { city, setSearchValue } = useContext(AppContext);
 
   const [isShow, setIsShow] = useState<boolean>(false);
+  const [inputValue, setInputValue] = useState<string>("");
+
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const onClickShowInput = () => {
     setIsShow((prev) => !prev);
+    setInputValue("");
   };
+
+  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+    setSearchValue(e.target.value);
+  };
+
+  useEffect(() => {
+    if (isShow && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isShow]);
 
   return (
     <div className={style.cityBox}>
@@ -29,7 +46,7 @@ const City: React.FC = () => {
           fill="white"
         />
       </svg>
-      <span>Moscow</span>
+      <span>{city}</span>
       <button
         style={{ rotate: isShow ? "180deg" : "0deg" }}
         onClick={onClickShowInput}
@@ -59,7 +76,12 @@ const City: React.FC = () => {
         }}
         className={style.searchBox}
       >
-        <input type="text" />
+        <input
+          ref={inputRef}
+          type="text"
+          value={inputValue}
+          onChange={onChangeInput}
+        />
       </div>
     </div>
   );

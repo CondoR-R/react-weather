@@ -12,4 +12,6 @@ export const AppContext = createContext<{
   current?: Current;
   daily?: Daily[];
   tommorow?: Tommorow;
-}>({});
+  city?: string;
+  setSearchValue: (arg: string) => void;
+}>({ setSearchValue: () => {} });

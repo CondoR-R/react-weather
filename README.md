@@ -7,11 +7,14 @@
 - Прогноз погоды на день, неделю
 - Текущая погода
 - Получение данных о погоде по координатам пользователя
+- Получение данных о погоде по поиску города
 
 ## 🛠 Технологии
 
-- React
-- TypeScript
-- SCSS
+- [React](https://react.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [SCSS](https://sass-lang.com/)
 - CSS modules
-- Recharts
+- [Recharts](https://recharts.org/en-US)
+- [Open meteo API](https://open-meteo.com/en/docs)
+- [Геокодер API](https://yandex.ru/maps-api/docs/geocoder-api/quickstart.html)
