@@ -10,7 +10,7 @@ export function getTommorow(dailyData: {
     (dailyData.temperature_2m_max[1] + dailyData.temperature_2m_min[1]) / 2;
 
   const tommorow: Tommorow = {
-    text: tommorowTemp < todayTemp ? "colder" : "warmer",
+    text: tommorowTemp < todayTemp ? "холоднее" : "теплее",
     value: Math.round(Math.abs(todayTemp - tommorowTemp)),
   };
 

@@ -24,7 +24,7 @@ const ForecastInfo: React.FC<ForecastInfoProps> = ({ weeklyForecast }) => {
           />
         </svg>
       ),
-      name: "Min",
+      name: "Мин.",
       key: "minTemp",
       additionalText: "°C",
     },
@@ -43,7 +43,7 @@ const ForecastInfo: React.FC<ForecastInfoProps> = ({ weeklyForecast }) => {
           />
         </svg>
       ),
-      name: "Max",
+      name: "Макс.",
       key: "maxTemp",
       additionalText: "°C",
     },
@@ -94,9 +94,9 @@ const ForecastInfo: React.FC<ForecastInfoProps> = ({ weeklyForecast }) => {
           />
         </svg>
       ),
-      name: "Wind",
+      name: "Ветер",
       key: "wind",
-      additionalText: "km/h",
+      additionalText: "км/ч",
     },
     {
       svg: (
@@ -113,7 +113,7 @@ const ForecastInfo: React.FC<ForecastInfoProps> = ({ weeklyForecast }) => {
           />
         </svg>
       ),
-      name: "Chance",
+      name: "Шанс",
       key: "chance",
       additionalText: "%",
     },
@@ -132,7 +132,7 @@ const ForecastInfo: React.FC<ForecastInfoProps> = ({ weeklyForecast }) => {
           />
         </svg>
       ),
-      name: "Sunrise",
+      name: "Рассвет",
       key: "sunrise",
       additionalText: "",
     },
@@ -152,7 +152,7 @@ const ForecastInfo: React.FC<ForecastInfoProps> = ({ weeklyForecast }) => {
           />
         </svg>
       ),
-      name: "Sunset",
+      name: "Закат",
       key: "sunset",
       additionalText: "",
     },
@@ -162,7 +162,7 @@ const ForecastInfo: React.FC<ForecastInfoProps> = ({ weeklyForecast }) => {
 
   return (
     <div className={style.box}>
-      <h2 className={style.title}>Forecast:</h2>
+      <h2 className={style.title}>Прогноз:</h2>
 
       <div className={style.infoBox}>
         {forecast.map((param, i) => (

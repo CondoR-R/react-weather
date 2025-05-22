@@ -30,7 +30,7 @@ const HourlyChart: React.FC<ForecastBoxProps> = ({ className }) => {
             fill="white"
           />
         </svg>
-        <span>24-hour temperature</span>
+        <span>24-часовой прогноз</span>
       </h2>
       <div className={style.chartWrapper}>
         <ResponsiveContainer
@@ -67,7 +67,7 @@ const HourlyChart: React.FC<ForecastBoxProps> = ({ className }) => {
                   width={30}
                   height={25}
                 />
-                <span className={style.wind}>{hourlyWeather.wind}</span>
+                <span className={style.wind}>{hourlyWeather.wind}км/ч</span>
               </div>
             );
           })}

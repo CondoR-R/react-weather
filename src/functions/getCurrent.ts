@@ -14,24 +14,24 @@ export function getCurrent(currentData: {
   const current = {
     apparentTemperature: Math.round(currentData.apparent_temperature),
     temperature: Math.round(currentData.temperature_2m),
-    wind: `${Math.round(currentData.wind_speed_10m)}km/h`,
+    wind: `${Math.round(currentData.wind_speed_10m)}`,
     weather: "sunny",
     date: currentData.time,
-    name: "Sunny",
+    name: "Солнечно",
   };
 
   if (currentData.cloud_cover > 50) {
     current.weather = "cloudy";
-    current.name = "Cloudy";
+    current.name = "Облачно";
   } else if (currentData.cloud_cover !== 0) {
     current.weather = "partlyCloudy";
-    current.name = "Partly cloudy";
+    current.name = "Переменная облачность";
   } else if (currentData.rain || currentData.showers) {
     current.weather = "rain";
-    current.name = "Rain";
+    current.name = "Дождь";
   } else if (currentData.snowfall) {
     current.weather = "snow";
-    current.name = "Snow";
+    current.name = "Снег";
   }
 
   return current;

@@ -15,7 +15,7 @@ const TommorowTemp: React.FC<TommorowTempProps> = ({ className }) => {
   return (
     <div className={`${style.tommorowBox} ${className}`}>
       <span>
-        Tommorow it will get {tommorow?.text} by {tommorow?.value}°C
+        Завтра будет {tommorow?.text} на {tommorow?.value}°C
       </span>
       {/* <svg
         className={style.green}

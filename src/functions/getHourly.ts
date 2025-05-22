@@ -23,7 +23,7 @@ export function getHourly(hourlyData: {
       time: hourlyData.time[i].slice(-5),
       temp: Math.round(hourlyData.temperature_2m[i]),
       weather: weather,
-      wind: `${Math.round(hourlyData.wind_speed_10m[i])}km/h`,
+      wind: `${Math.round(hourlyData.wind_speed_10m[i])}`,
     };
     hourlyArr.push(hourlyDay);
   }

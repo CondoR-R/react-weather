@@ -1,4 +1,4 @@
 export type Tommorow = {
-  text: "warmer" | "colder";
+  text: "теплее" | "холоднее";
   value: number;
 };

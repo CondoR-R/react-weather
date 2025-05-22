@@ -27,12 +27,12 @@ const CurrentTemperature: React.FC = () => {
       </div>
       <div className={style.right}>
         <div className={style.rightBox}>
-          <span className={style.title}>Feels like</span>
+          <span className={style.title}>Ощущается как:</span>
           <span className={style.value}>{current?.apparentTemperature}°C</span>
         </div>
         <div className={style.rightBox}>
-          <span className={style.title}>Wind</span>
-          <span className={style.value}>{current?.wind}</span>
+          <span className={style.title}>Ветер: </span>
+          <span className={style.value}>{current?.wind}км/ч</span>
         </div>
       </div>
     </div>
