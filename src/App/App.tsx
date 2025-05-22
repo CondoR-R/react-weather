@@ -38,6 +38,7 @@ const App: React.FC = () => {
   // город из инпута
   const [searchCity, setSearchCity] = useState<string>("");
 
+  console.log(searchCity);
   // город
   const [city, setCity] = useState<string>("");
 
@@ -52,7 +53,7 @@ const App: React.FC = () => {
 
   // данные о завтрашней температуре
   const [tommorow, setTommorow] = useState<Tommorow>({
-    text: "colder",
+    text: "холоднее",
     value: 0,
   });
 

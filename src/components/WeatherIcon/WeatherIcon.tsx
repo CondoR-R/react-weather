@@ -18,7 +18,7 @@ const WeatherIcon: React.FC = () => {
         className={style.weather}
         alt={"cloudy"}
         width={320}
-        height={320}
+        height={300}
       />
     </div>
   );

@@ -5,7 +5,7 @@ export function getCurrent(currentData: {
   temperature_2m: number;
   wind_speed_10m: number;
   cloud_cover: number;
-  //   is_day: 1;
+  is_day: number;
   rain: number;
   showers: number;
   snowfall: number;
@@ -15,16 +15,16 @@ export function getCurrent(currentData: {
     apparentTemperature: Math.round(currentData.apparent_temperature),
     temperature: Math.round(currentData.temperature_2m),
     wind: `${Math.round(currentData.wind_speed_10m)}`,
-    weather: "sunny",
+    weather: currentData.is_day ? "sunny" : "moon",
     date: currentData.time,
-    name: "Солнечно",
+    name: "Ясно",
   };
 
   if (currentData.cloud_cover > 50) {
     current.weather = "cloudy";
     current.name = "Облачно";
   } else if (currentData.cloud_cover !== 0) {
-    current.weather = "partlyCloudy";
+    current.weather = currentData.is_day ? "partlyCloudy" : "partlyMoon";
     current.name = "Переменная облачность";
   } else if (currentData.rain || currentData.showers) {
     current.weather = "rain";
