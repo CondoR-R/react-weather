@@ -141,8 +141,7 @@ const App: React.FC = () => {
       try {
         const url = "https://api.open-meteo.com/v1/forecast";
         const coord = `latitude=${coords.latitude}&longitude=${coords.longitude}`;
-
-        const hourlyParams = `hourly=temperature_2m,wind_speed_10m,rain,showers,snowfall,cloud_cover`;
+        const hourlyParams = `hourly=temperature_2m,wind_speed_10m,rain,showers,snowfall,cloud_cover,is_day`;
         const currentParams = `current=temperature_2m,apparent_temperature,wind_speed_10m,is_day,cloud_cover,showers,rain,snowfall`;
         const dailyParams = `&daily=sunrise,sunset,rain_sum,showers_sum,snowfall_sum,precipitation_probability_max,temperature_2m_max,temperature_2m_min,wind_speed_10m_max,cloud_cover_mean`;
 
