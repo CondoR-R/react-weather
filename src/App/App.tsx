@@ -38,7 +38,6 @@ const App: React.FC = () => {
   // город из инпута
   const [searchCity, setSearchCity] = useState<string>("");
 
-  console.log(searchCity);
   // город
   const [city, setCity] = useState<string>("");
 
@@ -57,11 +56,12 @@ const App: React.FC = () => {
     value: 0,
   });
 
+  // запись в состояние города для поиска
   const setSearchValue = useMemo(
     () =>
       debounce((searchValue: string) => {
         setSearchCity(searchValue);
-      }, 500),
+      }, 750),
     [setSearchCity]
   );
 
@@ -133,6 +133,64 @@ const App: React.FC = () => {
       }
     })();
   }, [coords]);
+
+  // получение координат по городу
+  useEffect(() => {
+    if (!searchCity) return;
+
+    (async () => {
+      try {
+        const url = "https://geocode-maps.yandex.ru/v1";
+        const apikey = `apikey=${APIKey}`;
+        const geocode = `geocode=${searchCity}`;
+        const lang = "lang=ru_RU";
+        const format = "format=json";
+        const results = "results=1";
+
+        const res = await axios.get(
+          `${url}?${apikey}&${geocode}&${lang}&${format}&${results}`
+        );
+
+        if (res.status === 404) {
+          throw new Error("Координаты города не найдены");
+        }
+
+        if (res.status !== 200) {
+          throw new Error(`Ошибка сервера: ${res.status}`);
+        }
+
+        const coord =
+          res.data.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos.split(
+            " "
+          );
+
+        setCoords({ longitude: +coord[0], latitude: +coord[1] });
+
+        console.log(coord);
+      } catch (err) {
+        if (axios.isAxiosError(err)) {
+          // Обработка ошибок Axios
+          if (err.response) {
+            // Сервер ответил с кодом ошибки
+            console.log("Ошибка ответа:", err.response.status);
+            if (err.response.status === 404) {
+              // Специальная обработка для 404
+              console.log("Координаты города не найдены. ");
+            }
+          } else if (err.request) {
+            // Запрос был сделан, но ответ не получен
+            console.log("Нет ответа от сервера");
+          } else {
+            // Ошибка при настройке запроса
+            console.log("Ошибка запроса:", err.message);
+          }
+        } else {
+          // Другие ошибки
+          console.log("Неожиданная ошибка:", err);
+        }
+      }
+    })();
+  }, [searchCity]);
 
   // получение данных о погоде
   useEffect(() => {
