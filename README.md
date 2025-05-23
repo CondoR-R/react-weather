@@ -20,5 +20,5 @@
 - CSS modules
 - [Recharts](https://recharts.org/en-US)
 - [Open meteo API](https://open-meteo.com/en/docs)
-- [Геокодер API](https://yandex.ru/maps-api/docs/geocoder-api/quickstart.html)
+- [Геокодер API](https://geocode.maps.co/)
 - [React Content Loader](https://www.npmjs.com/package/react-content-loader)

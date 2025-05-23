@@ -83,18 +83,24 @@ const App: React.FC = () => {
 
     (async () => {
       try {
-        const url = "https://geocode-maps.yandex.ru/v1";
-        const apikey = `apikey=${APIKey}`;
-        const geocode = `geocode=${coords.longitude}%3B${coords.latitude}`;
-        const lang = "lang=ru_RU";
-        const sco = "sco=longlat";
-        const kind = "kind=locality";
-        const format = "format=json";
-        const results = "results=1";
+        // const url = "https://geocode-maps.yandex.ru/v1";
+        // const apikey = `apikey=${APIKey}`;
+        // const geocode = `geocode=${coords.longitude}%3B${coords.latitude}`;
+        // const lang = "lang=ru_RU";
+        // const sco = "sco=longlat";
+        // const kind = "kind=locality";
+        // const format = "format=json";
+        // const results = "results=1";
 
-        const res = await axios.get(
-          `${url}?${apikey}&${geocode}&${lang}&${sco}&${kind}&${format}&${results}`
-        );
+        // const res = await axios.get(
+        //   `${url}?${apikey}&${geocode}&${lang}&${sco}&${kind}&${format}&${results}`
+        // );
+
+        const url = "https://geocode.maps.co/reverse";
+        const coord = `lat=${coords.latitude}&lon=${coords.longitude}`;
+        const apikey = `api_key=${APIKey}`;
+
+        const res = await axios.get(`${url}?${coord}&${apikey}`);
 
         if (res.status === 404) {
           throw new Error(
@@ -106,8 +112,9 @@ const App: React.FC = () => {
           throw new Error(`Ошибка сервера: ${res.status}`);
         }
 
-        const newCity =
-          res.data.response.GeoObjectCollection.featureMember[0].GeoObject.name;
+        // const newCity =
+        //   res.data.response.GeoObjectCollection.featureMember[0].GeoObject.name;
+        const newCity = res.data.address.city;
         setCity(newCity);
       } catch (err) {
         if (axios.isAxiosError(err)) {
@@ -142,16 +149,22 @@ const App: React.FC = () => {
 
     (async () => {
       try {
-        const url = "https://geocode-maps.yandex.ru/v1";
-        const apikey = `apikey=${APIKey}`;
-        const geocode = `geocode=${searchCity}`;
-        const lang = "lang=ru_RU";
-        const format = "format=json";
-        const results = "results=1";
+        // const url = "https://geocode-maps.yandex.ru/v1";
+        // const apikey = `apikey=${APIKey}`;
+        // const geocode = `geocode=${searchCity}`;
+        // const lang = "lang=ru_RU";
+        // const format = "format=json";
+        // const results = "results=1";
 
-        const res = await axios.get(
-          `${url}?${apikey}&${geocode}&${lang}&${format}&${results}`
-        );
+        // const res = await axios.get(
+        //   `${url}?${apikey}&${geocode}&${lang}&${format}&${results}`
+        // );
+
+        const url = "https://geocode.maps.co/search";
+        const address = `q=${searchCity}`;
+        const apikey = `api_key=${APIKey}`;
+
+        const res = await axios.get(`${url}?${address}&${apikey}`);
 
         if (res.status === 404) {
           throw new Error("Координаты города не найдены");
@@ -161,14 +174,16 @@ const App: React.FC = () => {
           throw new Error(`Ошибка сервера: ${res.status}`);
         }
 
-        const coord =
-          res.data.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos.split(
-            " "
-          );
+        const { lat, lon } = res.data[0];
 
-        setCoords({ longitude: +coord[0], latitude: +coord[1] });
+        setCoords({ longitude: +lon, latitude: +lat });
 
-        console.log(coord);
+        // const coord =
+        //   res.data.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos.split(
+        //     " "
+        //   );
+
+        // setCoords({ longitude: +coord[0], latitude: +coord[1] });
       } catch (err) {
         if (axios.isAxiosError(err)) {
           // Обработка ошибок Axios
