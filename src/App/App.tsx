@@ -29,6 +29,8 @@ import { APIKey } from "./ApiKey";
 const App: React.FC = () => {
   // состояния
 
+  const [isLoading, setIsloading] = useState<boolean>(false);
+
   // координаты
   const [coords, setCoords] = useState<Coords>({
     latitude: null,
@@ -197,6 +199,7 @@ const App: React.FC = () => {
     if (!coords.latitude && !coords.longitude) return;
 
     (async () => {
+      setIsloading(true);
       try {
         const url = "https://api.open-meteo.com/v1/forecast";
         const coord = `latitude=${coords.latitude}&longitude=${coords.longitude}`;
@@ -247,6 +250,8 @@ const App: React.FC = () => {
           // Другие ошибки
           console.log("Неожиданная ошибка:", err);
         }
+      } finally {
+        setIsloading(false);
       }
     })();
   }, [coords]);
@@ -258,6 +263,7 @@ const App: React.FC = () => {
     daily,
     tommorow,
     city,
+    isLoading,
     setSearchValue,
   };
 

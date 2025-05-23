@@ -3,9 +3,11 @@ import { useContext } from "react";
 import { AppContext } from "../../App/AppContext";
 
 import style from "./currentTemperature.module.scss";
+import CurrentLeftSkeleton from "./CurrentLeftSkeleton";
+import CurrentRightSkeleton from "./CurrentRightSkeleton";
 
 const CurrentTemperature: React.FC = () => {
-  const { current } = useContext(AppContext);
+  const { current, isLoading } = useContext(AppContext);
 
   let day: string = "";
   let date: string = "";
@@ -19,21 +21,36 @@ const CurrentTemperature: React.FC = () => {
   return (
     <div className={style.box}>
       <div className={style.left}>
-        <p className={style.temperature}>{current?.temperature}°C</p>
-        <p className={style.date}>
-          {day} | {date}
-        </p>
-        <p className={style.cloudy}>{current?.name}</p>
+        {isLoading ? (
+          <CurrentLeftSkeleton />
+        ) : (
+          <>
+            {" "}
+            <p className={style.temperature}>{current?.temperature}°C</p>
+            <p className={style.date}>
+              {day} | {date}
+            </p>
+            <p className={style.cloudy}>{current?.name}</p>
+          </>
+        )}
       </div>
       <div className={style.right}>
-        <div className={style.rightBox}>
-          <span className={style.title}>Ощущается как:</span>
-          <span className={style.value}>{current?.apparentTemperature}°C</span>
-        </div>
-        <div className={style.rightBox}>
-          <span className={style.title}>Ветер: </span>
-          <span className={style.value}>{current?.wind}км/ч</span>
-        </div>
+        {isLoading ? (
+          <CurrentRightSkeleton />
+        ) : (
+          <>
+            <div className={style.rightBox}>
+              <span className={style.title}>Ощущается как:</span>
+              <span className={style.value}>
+                {current?.apparentTemperature}°C
+              </span>
+            </div>
+            <div className={style.rightBox}>
+              <span className={style.title}>Ветер: </span>
+              <span className={style.value}>{current?.wind}км/ч</span>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

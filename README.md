@@ -16,7 +16,9 @@
 - [React](https://react.dev/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [SCSS](https://sass-lang.com/)
+- [Axios](https://axios-http.com/ru/docs/intro)
 - CSS modules
 - [Recharts](https://recharts.org/en-US)
 - [Open meteo API](https://open-meteo.com/en/docs)
 - [Геокодер API](https://yandex.ru/maps-api/docs/geocoder-api/quickstart.html)
+- [React Content Loader](https://www.npmjs.com/package/react-content-loader)
