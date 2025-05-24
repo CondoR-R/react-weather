@@ -79,7 +79,7 @@ const App: React.FC = () => {
 
   // получение данных о городе
   useEffect(() => {
-    if (!coords.latitude && !coords.longitude) return;
+    if ((!coords.latitude && !coords.longitude) || city) return;
 
     (async () => {
       try {
@@ -114,7 +114,11 @@ const App: React.FC = () => {
 
         // const newCity =
         //   res.data.response.GeoObjectCollection.featureMember[0].GeoObject.name;
-        const newCity = res.data.address.city;
+        let newCity = res.data.address.city;
+
+        if (!newCity) {
+          newCity = res.data.address.town;
+        }
         setCity(newCity);
       } catch (err) {
         if (axios.isAxiosError(err)) {
@@ -174,9 +178,18 @@ const App: React.FC = () => {
           throw new Error(`Ошибка сервера: ${res.status}`);
         }
 
-        const { lat, lon } = res.data[0];
+        for (const data of res.data) {
+          if (
+            data.type === "city" ||
+            data.type === "town" ||
+            data.type === "village"
+          ) {
+            const { lat, lon } = data;
 
-        setCoords({ longitude: +lon, latitude: +lat });
+            setCoords({ longitude: +lon, latitude: +lat });
+            setCity(data.display_name.split(",")[0]);
+          }
+        }
 
         // const coord =
         //   res.data.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos.split(
