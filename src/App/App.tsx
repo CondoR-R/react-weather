@@ -332,11 +332,23 @@ const App: React.FC = () => {
     setSearchValue,
   };
 
+  let appClass = current?.isDay ? "sunny" : "night";
+  if (current?.weather === "rain") appClass = "rain";
+  else if (
+    current?.weather === "cloudy" ||
+    current?.weather === "partlyCloudy" ||
+    current?.weather === "partlyMoon"
+  ) {
+    appClass = current.isDay ? "cloudy" : "night-cloudy";
+  }
+
   return (
     <AppContext value={contextValue}>
-      <div className="app">
-        <CurrentBox />
-        <ForecastBox />
+      <div className={`app ${appClass}`}>
+        <div className="app-inside">
+          <CurrentBox />
+          <ForecastBox />
+        </div>
       </div>
     </AppContext>
   );

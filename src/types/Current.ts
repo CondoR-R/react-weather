@@ -5,4 +5,5 @@ export type Current = {
   weather: string;
   apparentTemperature: number;
   wind: string;
+  isDay: boolean;
 } | null;

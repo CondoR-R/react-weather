@@ -18,6 +18,7 @@ export function getCurrent(currentData: {
     weather: currentData.is_day ? "sunny" : "moon",
     date: currentData.time,
     name: "Ясно",
+    isDay: !!currentData.is_day,
   };
 
   if (currentData.cloud_cover > 50) {
