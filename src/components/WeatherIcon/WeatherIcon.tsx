@@ -8,13 +8,13 @@ import style from "./WeatherIcon.module.scss";
 import WeatherIconSkeleton from "./WeatherIconSkeleton";
 
 const WeatherIcon: React.FC = () => {
-  const { current, isLoading } = useContext(AppContext);
+  const { current, isLoadingForecast } = useContext(AppContext);
 
   if (!current?.weather) return;
 
   return (
     <div className={style.weather}>
-      {isLoading ? (
+      {isLoadingForecast ? (
         <WeatherIconSkeleton />
       ) : (
         <img

@@ -13,11 +13,11 @@ import HourlyChartSkeleton from "../../components/HourlyChart/HourlyChartSkeleto
 import WeeklyForecastSkeleton from "../../components/WeeklyForecast/WeeklyForecastSkeleton";
 
 const ForecastBox: React.FC = () => {
-  const { isLoading } = useContext(AppContext);
+  const { isLoadingForecast } = useContext(AppContext);
 
   return (
     <div className={style.box}>
-      {isLoading ? (
+      {isLoadingForecast ? (
         <>
           <TommorowTempSkeleton className={style.tommorow} />
           <HourlyChartSkeleton className={style.chart} />

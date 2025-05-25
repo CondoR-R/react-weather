@@ -13,6 +13,13 @@ export const AppContext = createContext<{
   daily?: Daily[];
   tommorow?: Tommorow;
   city?: string;
-  isLoading: boolean;
+  isLoadingForecast: boolean;
+  isLoadingCity: boolean;
+  error: string;
   setSearchValue: (arg: string) => void;
-}>({ setSearchValue: () => {}, isLoading: false });
+}>({
+  setSearchValue: () => {},
+  isLoadingForecast: true,
+  isLoadingCity: true,
+  error: "",
+});

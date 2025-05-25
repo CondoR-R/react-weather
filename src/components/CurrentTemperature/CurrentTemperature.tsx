@@ -7,7 +7,7 @@ import CurrentLeftSkeleton from "./CurrentLeftSkeleton";
 import CurrentRightSkeleton from "./CurrentRightSkeleton";
 
 const CurrentTemperature: React.FC = () => {
-  const { current, isLoading } = useContext(AppContext);
+  const { current, isLoadingForecast } = useContext(AppContext);
 
   let day: string = "";
   let date: string = "";
@@ -21,7 +21,7 @@ const CurrentTemperature: React.FC = () => {
   return (
     <div className={style.box}>
       <div className={style.left}>
-        {isLoading ? (
+        {isLoadingForecast ? (
           <CurrentLeftSkeleton />
         ) : (
           <>
@@ -35,7 +35,7 @@ const CurrentTemperature: React.FC = () => {
         )}
       </div>
       <div className={style.right}>
-        {isLoading ? (
+        {isLoadingForecast ? (
           <CurrentRightSkeleton />
         ) : (
           <>

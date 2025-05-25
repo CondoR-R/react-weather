@@ -9,7 +9,7 @@ import style from "./City.module.scss";
 import CitySkeleton from "./CitySkeleton";
 
 const City: React.FC = () => {
-  const { city, setSearchValue, isLoading } = useContext(AppContext);
+  const { city, setSearchValue, isLoadingCity } = useContext(AppContext);
 
   const [isShow, setIsShow] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>("");
@@ -47,7 +47,7 @@ const City: React.FC = () => {
           fill="white"
         />
       </svg>
-      {isLoading ? <CitySkeleton /> : <span>{city}</span>}
+      {isLoadingCity ? <CitySkeleton /> : <span>{city}</span>}
       <button
         style={{ rotate: isShow ? "180deg" : "0deg" }}
         onClick={onClickShowInput}

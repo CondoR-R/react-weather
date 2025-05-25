@@ -1,9 +1,16 @@
 .header {
+  height: 32rem;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.forecast {
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  height: 32rem;
 }
 
 .left {

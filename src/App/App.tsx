@@ -29,7 +29,9 @@ import { APIKey } from "./ApiKey";
 const App: React.FC = () => {
   // состояния
 
-  const [isLoading, setIsloading] = useState<boolean>(false);
+  const [isLoadingForecast, setIsloadingForecast] = useState<boolean>(true);
+  const [isLoadingCity, setIsloadingCity] = useState<boolean>(true);
+  const [error, setError] = useState<string>("");
 
   // координаты
   const [coords, setCoords] = useState<Coords>({
@@ -82,6 +84,7 @@ const App: React.FC = () => {
     if ((!coords.latitude && !coords.longitude) || city) return;
 
     (async () => {
+      setIsloadingCity(true);
       try {
         // const url = "https://geocode-maps.yandex.ru/v1";
         // const apikey = `apikey=${APIKey}`;
@@ -120,28 +123,39 @@ const App: React.FC = () => {
           newCity = res.data.address.town;
         }
         setCity(newCity);
+
+        // убираем загрузку только при успешном получении данных
+        setIsloadingCity(false);
       } catch (err) {
         if (axios.isAxiosError(err)) {
           // Обработка ошибок Axios
           if (err.response) {
             // Сервер ответил с кодом ошибки
-            console.log("Ошибка ответа:", err.response.status);
+            setError(
+              `Ошибка ответа при получении данных о населенном пункте: ${err.response.status}`
+            );
             if (err.response.status === 404) {
               // Специальная обработка для 404
-              console.log(
+              setError(
                 "Данные о населенном пункте не найдены. Проверьте координаты."
               );
             }
           } else if (err.request) {
             // Запрос был сделан, но ответ не получен
-            console.log("Нет ответа от сервера");
+            setError(
+              "Нет ответа от сервера при получении данных о населенном пункте"
+            );
           } else {
             // Ошибка при настройке запроса
-            console.log("Ошибка запроса:", err.message);
+            setError(
+              `Ошибка запроса при получении данных о населенном пункте: ${err.message}`
+            );
           }
         } else {
           // Другие ошибки
-          console.log("Неожиданная ошибка:", err);
+          setError(
+            `Неожиданная ошибка при получении данных о населенном пункте: ${err}`
+          );
         }
       }
     })();
@@ -152,6 +166,7 @@ const App: React.FC = () => {
     if (!searchCity) return;
 
     (async () => {
+      setIsloadingCity(true);
       try {
         // const url = "https://geocode-maps.yandex.ru/v1";
         // const apikey = `apikey=${APIKey}`;
@@ -175,7 +190,9 @@ const App: React.FC = () => {
         }
 
         if (res.status !== 200) {
-          throw new Error(`Ошибка сервера: ${res.status}`);
+          throw new Error(
+            `Ошибка сервера при получении данных о координатах населенного пункта: ${res.status}`
+          );
         }
 
         for (const data of res.data) {
@@ -197,26 +214,37 @@ const App: React.FC = () => {
         //   );
 
         // setCoords({ longitude: +coord[0], latitude: +coord[1] });
+
+        // убираем загрузку только при успешном получении данных
+        setIsloadingCity(false);
       } catch (err) {
         if (axios.isAxiosError(err)) {
           // Обработка ошибок Axios
           if (err.response) {
             // Сервер ответил с кодом ошибки
-            console.log("Ошибка ответа:", err.response.status);
+            setError(
+              `Ошибка ответа при получении данных о координатах населенного пункта: ${err.response.status}`
+            );
             if (err.response.status === 404) {
               // Специальная обработка для 404
-              console.log("Координаты города не найдены. ");
+              setError("Координаты населенного пункта не найдены. ");
             }
           } else if (err.request) {
             // Запрос был сделан, но ответ не получен
-            console.log("Нет ответа от сервера");
+            setError(
+              "Нет ответа от сервера при получении данных о координатах населенного пункта"
+            );
           } else {
             // Ошибка при настройке запроса
-            console.log("Ошибка запроса:", err.message);
+            setError(
+              `Ошибка запроса при получении данных о координатах населенного пункта: ${err.message}`
+            );
           }
         } else {
           // Другие ошибки
-          console.log("Неожиданная ошибка:", err);
+          setError(
+            `Неожиданная ошибка при получении данных о координатах населенного пункта: ${err}`
+          );
         }
       }
     })();
@@ -227,7 +255,7 @@ const App: React.FC = () => {
     if (!coords.latitude && !coords.longitude) return;
 
     (async () => {
-      setIsloading(true);
+      setIsloadingForecast(true);
       try {
         const url = "https://api.open-meteo.com/v1/forecast";
         const coord = `latitude=${coords.latitude}&longitude=${coords.longitude}`;
@@ -244,7 +272,9 @@ const App: React.FC = () => {
         }
 
         if (res.status !== 200) {
-          throw new Error(`Ошибка сервера: ${res.status}`);
+          throw new Error(
+            `Ошибка сервера при получении данных о погоде: ${res.status}`
+          );
         }
 
         const {
@@ -257,29 +287,34 @@ const App: React.FC = () => {
         setDaily(getDaily(dailyData));
         setHourly(getHourly(hourlyData));
         setCurrent(getCurrent(currentData));
+
+        // убираем загрузку только при успешном получении данных
+        setIsloadingForecast(false);
       } catch (err) {
         if (axios.isAxiosError(err)) {
           // Обработка ошибок Axios
           if (err.response) {
             // Сервер ответил с кодом ошибки
-            console.log("Ошибка ответа:", err.response.status);
+            setError(
+              `Ошибка ответа при получении данных о погоде:${err.response.status}`
+            );
             if (err.response.status === 404) {
               // Специальная обработка для 404
-              console.log("Данные о погоде не найдены. Проверьте координаты.");
+              setError("Данные о погоде не найдены. Проверьте координаты.");
             }
           } else if (err.request) {
             // Запрос был сделан, но ответ не получен
-            console.log("Нет ответа от сервера");
+            setError("Нет ответа от сервера при получении данных о погоде");
           } else {
             // Ошибка при настройке запроса
-            console.log("Ошибка запроса:", err.message);
+            setError(
+              `Ошибка запроса при получении данных о погоде: ${err.message}`
+            );
           }
         } else {
           // Другие ошибки
-          console.log("Неожиданная ошибка:", err);
+          setError(`Неожиданная ошибка при получении данных о погоде: ${err}`);
         }
-      } finally {
-        setIsloading(false);
       }
     })();
   }, [coords]);
@@ -291,7 +326,9 @@ const App: React.FC = () => {
     daily,
     tommorow,
     city,
-    isLoading,
+    isLoadingForecast,
+    isLoadingCity,
+    error,
     setSearchValue,
   };
 
