@@ -1,6 +1,4 @@
-.header {
-  height: 32rem;
-}
+@use "../../sass/helpers" as *;
 
 .top {
   display: flex;
@@ -11,12 +9,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
 
-.left {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  row-gap: 2rem;
+  @include mobile {
+    flex-direction: column;
+    row-gap: 2rem;
+    align-items: start;
+  }
 }

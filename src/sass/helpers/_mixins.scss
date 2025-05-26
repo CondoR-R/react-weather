@@ -1,0 +1,22 @@
+@mixin bg-border {
+  background-color: color-mix(in srgb, var(--color-white) 20%, transparent);
+  border-radius: 4rem;
+}
+
+@mixin laptop {
+  @media (width < 1440px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (width < 1024px) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (width < 768px) {
+    @content;
+  }
+}

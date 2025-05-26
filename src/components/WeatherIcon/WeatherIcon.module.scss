@@ -1,5 +1,11 @@
+@use "../../sass/helpers" as *;
+
 .weather {
   align-self: flex-end;
+
+  @include mobile {
+    order: -1;
+  }
 
   img {
     height: 30rem;

@@ -1,6 +1,8 @@
+@use "../../sass/helpers" as *;
+
 .chartBox {
-  background-color: color-mix(in srgb, var(--color-white) 20%, transparent);
-  border-radius: 4rem;
+  @include bg-border;
+
   position: relative;
 }
 
@@ -21,6 +23,14 @@
   height: 16rem;
   padding-inline: 3rem;
   color: var(--color-white);
+}
+
+.chart {
+  width: 108%;
+
+  @include mobile {
+    width: 120%;
+  }
 }
 
 .bottomRow {

@@ -1,7 +1,9 @@
+@use "../../sass/helpers" as *;
+
 .box {
+  @include bg-border;
+
   overflow: hidden;
-  background-color: color-mix(in srgb, var(--color-white) 20%, transparent);
-  border-radius: 4rem;
   padding: 2rem 1.5rem;
 
   display: flex;

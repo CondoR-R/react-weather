@@ -1,6 +1,8 @@
+@use "../../sass/helpers" as *;
+
 .tommorowBox {
-  background-color: color-mix(in srgb, var(--color-white) 20%, transparent);
-  border-radius: 4rem;
+  @include bg-border;
+
   padding: 1rem 3rem;
   display: flex;
   align-items: center;
@@ -10,6 +12,10 @@
 
   span {
     font-size: 3.2rem;
+
+    @include mobile {
+      font-size: 1.8rem;
+    }
   }
 
   .green {

@@ -19,9 +19,8 @@ const Header: React.FC = () => {
         {error && <ErrorMessage />}
       </div>
       <div className={style.forecast}>
-        <div className={style.left}>
-          <CurrentTemperature />
-        </div>
+        <CurrentTemperature />
+
         <WeatherIcon />
       </div>
     </div>

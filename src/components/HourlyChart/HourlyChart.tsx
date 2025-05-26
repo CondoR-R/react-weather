@@ -47,8 +47,11 @@ const HourlyChart: React.FC<ForecastBoxProps> = ({ className }) => {
               stroke="#fff"
               strokeWidth={1}
               dot={{ r: 2 }}
-              label={{ fill: "#fff", fontSize: 14 }}
-              style={{ transform: "translateY(15px)" }}
+              label={{
+                fill: "#fff",
+                fontSize: 16,
+                dy: -15,
+              }}
             />
           </LineChart>
         </ResponsiveContainer>
